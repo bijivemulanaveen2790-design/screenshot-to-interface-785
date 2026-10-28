@@ -90,7 +90,7 @@ export const analyzeComplaint = createServerFn({ method: "POST" })
         const res = await fetch(`${baseUrl}/detect`, {
           method: "POST",
           body: form,
-          headers: apiKey ? { Authorization: `Bearer ${apiKey}` } : undefined,
+          headers: apiKey ? { Authorization: `Bearer ${apiKey}` } : {},
           signal: AbortSignal.timeout(45_000),
         });
         if (!res.ok) {

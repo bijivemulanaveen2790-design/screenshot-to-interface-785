@@ -70,7 +70,7 @@ function AuthPage() {
 
   async function signUp(e: React.FormEvent) {
     e.preventDefault();
-    if (password.length < 8) return toast.error("Use at least 8 characters for your password.");
+    if (password.length < 8) return void toast.error("Use at least 8 characters for your password.");
     setBusy(true);
     const { data, error } = await supabase.auth.signUp({
       email,
@@ -78,7 +78,7 @@ function AuthPage() {
       options: { emailRedirectTo: window.location.origin + "/dashboard", data: { display_name: name.trim() || undefined } },
     });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) return void toast.error(error.message);
     if (!data.session) setSentTo(email);
   }
 
@@ -89,7 +89,7 @@ function AuthPage() {
       redirectTo: `${window.location.origin}/reset-password`,
     });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) return void toast.error(error.message);
     toast.success("If an account exists for that email, a reset link is on its way.");
   }
 

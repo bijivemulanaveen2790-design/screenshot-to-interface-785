@@ -86,9 +86,9 @@ export const complaintDetailQuery = (reference: string) =>
   queryOptions({
     queryKey: ["complaint", reference],
     queryFn: async (): Promise<ComplaintDetail | null> => {
-      const complaint = check(
-        await supabase.from("complaints").select("*").eq("reference", reference).maybeSingle(),
-      );
+      const res = await supabase.from("complaints").select("*").eq("reference", reference).maybeSingle();
+      if (res.error) throw new Error(res.error.message);
+      const complaint: Complaint | null = res.data;
       if (!complaint) return null;
       const id = complaint.id;
       const [images, detections, history, updates, assignments] = await Promise.all([

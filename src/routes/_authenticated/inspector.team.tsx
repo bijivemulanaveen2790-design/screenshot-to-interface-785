@@ -40,7 +40,7 @@ function TeamPage() {
     setBusy(true);
     const { error } = await supabase.rpc("admin_set_role", { _email: targetEmail, _role: role, _grant: grant });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) return void toast.error(error.message);
     toast.success(grant ? `${targetEmail} is now ${role === "admin" ? "an admin" : "an inspector"}.` : `Removed ${role} access for ${targetEmail}.`);
     qc.invalidateQueries({ queryKey: ["staff"] });
     qc.invalidateQueries({ queryKey: ["roles"] });

@@ -52,9 +52,9 @@ function StatusPanel({ detail, reference }: { detail: ComplaintDetail; reference
   async function save() {
     if (!next) return;
     setBusy(true);
-    const { error } = await supabase.rpc("set_complaint_status", { _complaint_id: c.id, _status: next, _note: note || undefined });
+    const { error } = await supabase.rpc("set_complaint_status", { _complaint_id: c.id, _status: next, ...(note.trim() ? { _note: note } : {}) });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) return void toast.error(error.message);
     toast.success(`Status changed to ${next}. The citizen has been notified.`);
     setNext(""); setNote("");
     refresh();
@@ -109,11 +109,11 @@ function ClassificationPanel({ detail, reference }: { detail: ComplaintDetail; r
   }, [c.damage_type, c.ai_damage_type, c.severity, c.ai_severity]);
 
   async function save() {
-    if (!type || !sev) return toast.error("Choose both damage type and severity.");
+    if (!type || !sev) return void toast.error("Choose both damage type and severity.");
     setBusy(true);
     const { error } = await supabase.rpc("review_classification", { _complaint_id: c.id, _damage_type: type, _severity: sev });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) return void toast.error(error.message);
     toast.success("Classification saved.");
     refresh();
   }
@@ -147,9 +147,9 @@ function AssignPanel({ detail, reference }: { detail: ComplaintDetail; reference
   async function save(e: React.FormEvent) {
     e.preventDefault();
     setBusy(true);
-    const { error } = await supabase.rpc("assign_repair_team", { _complaint_id: detail.complaint.id, _team: team, _note: note || undefined });
+    const { error } = await supabase.rpc("assign_repair_team", { _complaint_id: detail.complaint.id, _team: team, ...(note.trim() ? { _note: note } : {}) });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) return void toast.error(error.message);
     toast.success(`Assigned to ${team}.`);
     setTeam(""); setNote("");
     refresh();
@@ -179,7 +179,7 @@ function UpdatePanel({ detail, reference }: { detail: ComplaintDetail; reference
     setBusy(true);
     const { error } = await supabase.rpc("add_complaint_update", { _complaint_id: detail.complaint.id, _body: body, _internal: internal });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) return void toast.error(error.message);
     toast.success(internal ? "Internal note saved." : "Update posted. The citizen has been notified.");
     setBody("");
     refresh();

@@ -31,7 +31,7 @@ async function reverseGeocode(lat: number, lng: number) {
     );
     if (!res.ok) return null;
     const j = (await res.json()) as { display_name?: string; address?: Record<string, string> };
-    const road = j.address?.road ?? j.address?.pedestrian ?? j.address?.highway ?? null;
+    const road = j.address?.['road'] ?? j.address?.['pedestrian'] ?? j.address?.['highway'] ?? null;
     return { road, address: j.display_name ?? null };
   } catch {
     return null;
@@ -59,7 +59,7 @@ function ReportPage() {
   const [geoError, setGeoError] = useState<string | null>(null);
   const [lookup, setLookup] = useState(false);
   const [submitting, setSubmitting] = useState<string | null>(null);
-  const [done, setDone] = useState<{ reference: string; ai: AnalysisOutcome | null; uploadError?: string } | null>(null);
+  const [done, setDone] = useState<{ reference: string; ai: AnalysisOutcome | null; uploadError?: string | undefined } | null>(null);
 
   useEffect(() => () => photos.forEach((p) => URL.revokeObjectURL(p.url)), []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -125,9 +125,9 @@ function ReportPage() {
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
-    if (photos.length === 0) return toast.error("Add at least one photo of the damage.");
-    if (lat == null || lng == null || !source) return toast.error("Set the damage location.");
-    if (description.trim().length < 10) return toast.error("Describe the damage in at least 10 characters.");
+    if (photos.length === 0) return void toast.error("Add at least one photo of the damage.");
+    if (lat == null || lng == null || !source) return void toast.error("Set the damage location.");
+    if (description.trim().length < 10) return void toast.error("Describe the damage in at least 10 characters.");
 
     setSubmitting("Creating complaint…");
     const { data: created, error } = await supabase
@@ -147,14 +147,14 @@ function ReportPage() {
       .single();
     if (error || !created) {
       setSubmitting(null);
-      return toast.error(`Could not submit: ${error?.message ?? "unknown error"}`);
+      return void toast.error(`Could not submit: ${error?.message ?? "unknown error"}`);
     }
 
     let uploadError: string | undefined;
     try {
       for (let i = 0; i < photos.length; i++) {
         setSubmitting(`Uploading photo ${i + 1} of ${photos.length}…`);
-        await uploadComplaintImage(created.id, photos[i].file, "report", user.id);
+        await uploadComplaintImage(created.id, photos[i]!.file, "report", user.id);
       }
     } catch (err) {
       uploadError = errorMessage(err);

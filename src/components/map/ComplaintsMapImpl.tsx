@@ -18,7 +18,7 @@ function FitBounds({ points }: { points: MapComplaint[] }) {
   useEffect(() => {
     if (points.length === 0) return;
     if (points.length === 1) {
-      map.setView([points[0].latitude, points[0].longitude], 15);
+      map.setView([points[0]!.latitude, points[0]!.longitude], 15);
       return;
     }
     const b = L.latLngBounds(points.map((p) => [p.latitude, p.longitude] as [number, number]));
@@ -39,7 +39,7 @@ export default function ComplaintsMapImpl({
   height?: number;
 }) {
   const center: [number, number] = complaints.length
-    ? [complaints[0].latitude, complaints[0].longitude]
+    ? [complaints[0]!.latitude, complaints[0]!.longitude]
     : [20.5937, 78.9629];
   return (
     <div style={{ height }} className="overflow-hidden rounded-lg border">

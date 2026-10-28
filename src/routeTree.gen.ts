@@ -10,33 +10,282 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as AuthenticatedAppRouteImport } from './routes/_authenticated/app'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedInspectorRouteImport } from './routes/_authenticated/inspector'
+import { Route as AuthenticatedAppIndexRouteImport } from './routes/_authenticated/app.index'
+import { Route as AuthenticatedAppHelpRouteImport } from './routes/_authenticated/app.help'
+import { Route as AuthenticatedAppNotificationsRouteImport } from './routes/_authenticated/app.notifications'
+import { Route as AuthenticatedAppReportRouteImport } from './routes/_authenticated/app.report'
+import { Route as AuthenticatedInspectorIndexRouteImport } from './routes/_authenticated/inspector.index'
+import { Route as AuthenticatedInspectorInspectionsRouteImport } from './routes/_authenticated/inspector.inspections'
+import { Route as AuthenticatedInspectorMapRouteImport } from './routes/_authenticated/inspector.map'
+import { Route as AuthenticatedInspectorRepairsRouteImport } from './routes/_authenticated/inspector.repairs'
+import { Route as AuthenticatedInspectorResolvedRouteImport } from './routes/_authenticated/inspector.resolved'
+import { Route as AuthenticatedInspectorTeamRouteImport } from './routes/_authenticated/inspector.team'
+import { Route as AuthenticatedAppComplaintsIndexRouteImport } from './routes/_authenticated/app.complaints.index'
+import { Route as AuthenticatedAppComplaintsReferenceRouteImport } from './routes/_authenticated/app.complaints.$reference'
+import { Route as AuthenticatedInspectorComplaintsIndexRouteImport } from './routes/_authenticated/inspector.complaints.index'
+import { Route as AuthenticatedInspectorComplaintsReferenceRouteImport } from './routes/_authenticated/inspector.complaints.$reference'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAppRoute = AuthenticatedAppRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedInspectorRoute = AuthenticatedInspectorRouteImport.update({
+  id: '/inspector',
+  path: '/inspector',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAppIndexRoute = AuthenticatedAppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedAppRoute,
+} as any)
+const AuthenticatedAppHelpRoute = AuthenticatedAppHelpRouteImport.update({
+  id: '/help',
+  path: '/help',
+  getParentRoute: () => AuthenticatedAppRoute,
+} as any)
+const AuthenticatedAppNotificationsRoute =
+  AuthenticatedAppNotificationsRouteImport.update({
+    id: '/notifications',
+    path: '/notifications',
+    getParentRoute: () => AuthenticatedAppRoute,
+  } as any)
+const AuthenticatedAppReportRoute = AuthenticatedAppReportRouteImport.update({
+  id: '/report',
+  path: '/report',
+  getParentRoute: () => AuthenticatedAppRoute,
+} as any)
+const AuthenticatedInspectorIndexRoute =
+  AuthenticatedInspectorIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedInspectorRoute,
+  } as any)
+const AuthenticatedInspectorInspectionsRoute =
+  AuthenticatedInspectorInspectionsRouteImport.update({
+    id: '/inspections',
+    path: '/inspections',
+    getParentRoute: () => AuthenticatedInspectorRoute,
+  } as any)
+const AuthenticatedInspectorMapRoute =
+  AuthenticatedInspectorMapRouteImport.update({
+    id: '/map',
+    path: '/map',
+    getParentRoute: () => AuthenticatedInspectorRoute,
+  } as any)
+const AuthenticatedInspectorRepairsRoute =
+  AuthenticatedInspectorRepairsRouteImport.update({
+    id: '/repairs',
+    path: '/repairs',
+    getParentRoute: () => AuthenticatedInspectorRoute,
+  } as any)
+const AuthenticatedInspectorResolvedRoute =
+  AuthenticatedInspectorResolvedRouteImport.update({
+    id: '/resolved',
+    path: '/resolved',
+    getParentRoute: () => AuthenticatedInspectorRoute,
+  } as any)
+const AuthenticatedInspectorTeamRoute =
+  AuthenticatedInspectorTeamRouteImport.update({
+    id: '/team',
+    path: '/team',
+    getParentRoute: () => AuthenticatedInspectorRoute,
+  } as any)
+const AuthenticatedAppComplaintsIndexRoute =
+  AuthenticatedAppComplaintsIndexRouteImport.update({
+    id: '/complaints/',
+    path: '/complaints/',
+    getParentRoute: () => AuthenticatedAppRoute,
+  } as any)
+const AuthenticatedAppComplaintsReferenceRoute =
+  AuthenticatedAppComplaintsReferenceRouteImport.update({
+    id: '/complaints/$reference',
+    path: '/complaints/$reference',
+    getParentRoute: () => AuthenticatedAppRoute,
+  } as any)
+const AuthenticatedInspectorComplaintsIndexRoute =
+  AuthenticatedInspectorComplaintsIndexRouteImport.update({
+    id: '/complaints/',
+    path: '/complaints/',
+    getParentRoute: () => AuthenticatedInspectorRoute,
+  } as any)
+const AuthenticatedInspectorComplaintsReferenceRoute =
+  AuthenticatedInspectorComplaintsReferenceRouteImport.update({
+    id: '/complaints/$reference',
+    path: '/complaints/$reference',
+    getParentRoute: () => AuthenticatedInspectorRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/app': typeof AuthenticatedAppRouteWithChildren
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/inspector': typeof AuthenticatedInspectorRouteWithChildren
+  '/app/help': typeof AuthenticatedAppHelpRoute
+  '/app/notifications': typeof AuthenticatedAppNotificationsRoute
+  '/app/report': typeof AuthenticatedAppReportRoute
+  '/inspector/inspections': typeof AuthenticatedInspectorInspectionsRoute
+  '/inspector/map': typeof AuthenticatedInspectorMapRoute
+  '/inspector/repairs': typeof AuthenticatedInspectorRepairsRoute
+  '/inspector/resolved': typeof AuthenticatedInspectorResolvedRoute
+  '/inspector/team': typeof AuthenticatedInspectorTeamRoute
+  '/app/': typeof AuthenticatedAppIndexRoute
+  '/inspector/': typeof AuthenticatedInspectorIndexRoute
+  '/app/complaints/$reference': typeof AuthenticatedAppComplaintsReferenceRoute
+  '/inspector/complaints/$reference': typeof AuthenticatedInspectorComplaintsReferenceRoute
+  '/app/complaints/': typeof AuthenticatedAppComplaintsIndexRoute
+  '/inspector/complaints/': typeof AuthenticatedInspectorComplaintsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/app/help': typeof AuthenticatedAppHelpRoute
+  '/app/notifications': typeof AuthenticatedAppNotificationsRoute
+  '/app/report': typeof AuthenticatedAppReportRoute
+  '/inspector/inspections': typeof AuthenticatedInspectorInspectionsRoute
+  '/inspector/map': typeof AuthenticatedInspectorMapRoute
+  '/inspector/repairs': typeof AuthenticatedInspectorRepairsRoute
+  '/inspector/resolved': typeof AuthenticatedInspectorResolvedRoute
+  '/inspector/team': typeof AuthenticatedInspectorTeamRoute
+  '/app': typeof AuthenticatedAppIndexRoute
+  '/inspector': typeof AuthenticatedInspectorIndexRoute
+  '/app/complaints/$reference': typeof AuthenticatedAppComplaintsReferenceRoute
+  '/inspector/complaints/$reference': typeof AuthenticatedInspectorComplaintsReferenceRoute
+  '/app/complaints': typeof AuthenticatedAppComplaintsIndexRoute
+  '/inspector/complaints': typeof AuthenticatedInspectorComplaintsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/_authenticated/app': typeof AuthenticatedAppRouteWithChildren
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/inspector': typeof AuthenticatedInspectorRouteWithChildren
+  '/_authenticated/app/help': typeof AuthenticatedAppHelpRoute
+  '/_authenticated/app/notifications': typeof AuthenticatedAppNotificationsRoute
+  '/_authenticated/app/report': typeof AuthenticatedAppReportRoute
+  '/_authenticated/inspector/inspections': typeof AuthenticatedInspectorInspectionsRoute
+  '/_authenticated/inspector/map': typeof AuthenticatedInspectorMapRoute
+  '/_authenticated/inspector/repairs': typeof AuthenticatedInspectorRepairsRoute
+  '/_authenticated/inspector/resolved': typeof AuthenticatedInspectorResolvedRoute
+  '/_authenticated/inspector/team': typeof AuthenticatedInspectorTeamRoute
+  '/_authenticated/app/': typeof AuthenticatedAppIndexRoute
+  '/_authenticated/inspector/': typeof AuthenticatedInspectorIndexRoute
+  '/_authenticated/app/complaints/$reference': typeof AuthenticatedAppComplaintsReferenceRoute
+  '/_authenticated/inspector/complaints/$reference': typeof AuthenticatedInspectorComplaintsReferenceRoute
+  '/_authenticated/app/complaints/': typeof AuthenticatedAppComplaintsIndexRoute
+  '/_authenticated/inspector/complaints/': typeof AuthenticatedInspectorComplaintsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/reset-password'
+    | '/app'
+    | '/dashboard'
+    | '/inspector'
+    | '/app/help'
+    | '/app/notifications'
+    | '/app/report'
+    | '/inspector/inspections'
+    | '/inspector/map'
+    | '/inspector/repairs'
+    | '/inspector/resolved'
+    | '/inspector/team'
+    | '/app/'
+    | '/inspector/'
+    | '/app/complaints/$reference'
+    | '/inspector/complaints/$reference'
+    | '/app/complaints/'
+    | '/inspector/complaints/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/reset-password'
+    | '/dashboard'
+    | '/app/help'
+    | '/app/notifications'
+    | '/app/report'
+    | '/inspector/inspections'
+    | '/inspector/map'
+    | '/inspector/repairs'
+    | '/inspector/resolved'
+    | '/inspector/team'
+    | '/app'
+    | '/inspector'
+    | '/app/complaints/$reference'
+    | '/inspector/complaints/$reference'
+    | '/app/complaints'
+    | '/inspector/complaints'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/reset-password'
+    | '/_authenticated/app'
+    | '/_authenticated/dashboard'
+    | '/_authenticated/inspector'
+    | '/_authenticated/app/help'
+    | '/_authenticated/app/notifications'
+    | '/_authenticated/app/report'
+    | '/_authenticated/inspector/inspections'
+    | '/_authenticated/inspector/map'
+    | '/_authenticated/inspector/repairs'
+    | '/_authenticated/inspector/resolved'
+    | '/_authenticated/inspector/team'
+    | '/_authenticated/app/'
+    | '/_authenticated/inspector/'
+    | '/_authenticated/app/complaints/$reference'
+    | '/_authenticated/inspector/complaints/$reference'
+    | '/_authenticated/app/complaints/'
+    | '/_authenticated/inspector/complaints/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +297,222 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/app': {
+      id: '/_authenticated/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AuthenticatedAppRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/inspector': {
+      id: '/_authenticated/inspector'
+      path: '/inspector'
+      fullPath: '/inspector'
+      preLoaderRoute: typeof AuthenticatedInspectorRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/app/': {
+      id: '/_authenticated/app/'
+      path: '/'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AuthenticatedAppIndexRouteImport
+      parentRoute: typeof AuthenticatedAppRoute
+    }
+    '/_authenticated/app/help': {
+      id: '/_authenticated/app/help'
+      path: '/help'
+      fullPath: '/app/help'
+      preLoaderRoute: typeof AuthenticatedAppHelpRouteImport
+      parentRoute: typeof AuthenticatedAppRoute
+    }
+    '/_authenticated/app/notifications': {
+      id: '/_authenticated/app/notifications'
+      path: '/notifications'
+      fullPath: '/app/notifications'
+      preLoaderRoute: typeof AuthenticatedAppNotificationsRouteImport
+      parentRoute: typeof AuthenticatedAppRoute
+    }
+    '/_authenticated/app/report': {
+      id: '/_authenticated/app/report'
+      path: '/report'
+      fullPath: '/app/report'
+      preLoaderRoute: typeof AuthenticatedAppReportRouteImport
+      parentRoute: typeof AuthenticatedAppRoute
+    }
+    '/_authenticated/inspector/': {
+      id: '/_authenticated/inspector/'
+      path: '/'
+      fullPath: '/inspector/'
+      preLoaderRoute: typeof AuthenticatedInspectorIndexRouteImport
+      parentRoute: typeof AuthenticatedInspectorRoute
+    }
+    '/_authenticated/inspector/inspections': {
+      id: '/_authenticated/inspector/inspections'
+      path: '/inspections'
+      fullPath: '/inspector/inspections'
+      preLoaderRoute: typeof AuthenticatedInspectorInspectionsRouteImport
+      parentRoute: typeof AuthenticatedInspectorRoute
+    }
+    '/_authenticated/inspector/map': {
+      id: '/_authenticated/inspector/map'
+      path: '/map'
+      fullPath: '/inspector/map'
+      preLoaderRoute: typeof AuthenticatedInspectorMapRouteImport
+      parentRoute: typeof AuthenticatedInspectorRoute
+    }
+    '/_authenticated/inspector/repairs': {
+      id: '/_authenticated/inspector/repairs'
+      path: '/repairs'
+      fullPath: '/inspector/repairs'
+      preLoaderRoute: typeof AuthenticatedInspectorRepairsRouteImport
+      parentRoute: typeof AuthenticatedInspectorRoute
+    }
+    '/_authenticated/inspector/resolved': {
+      id: '/_authenticated/inspector/resolved'
+      path: '/resolved'
+      fullPath: '/inspector/resolved'
+      preLoaderRoute: typeof AuthenticatedInspectorResolvedRouteImport
+      parentRoute: typeof AuthenticatedInspectorRoute
+    }
+    '/_authenticated/inspector/team': {
+      id: '/_authenticated/inspector/team'
+      path: '/team'
+      fullPath: '/inspector/team'
+      preLoaderRoute: typeof AuthenticatedInspectorTeamRouteImport
+      parentRoute: typeof AuthenticatedInspectorRoute
+    }
+    '/_authenticated/app/complaints/': {
+      id: '/_authenticated/app/complaints/'
+      path: '/complaints'
+      fullPath: '/app/complaints/'
+      preLoaderRoute: typeof AuthenticatedAppComplaintsIndexRouteImport
+      parentRoute: typeof AuthenticatedAppRoute
+    }
+    '/_authenticated/app/complaints/$reference': {
+      id: '/_authenticated/app/complaints/$reference'
+      path: '/complaints/$reference'
+      fullPath: '/app/complaints/$reference'
+      preLoaderRoute: typeof AuthenticatedAppComplaintsReferenceRouteImport
+      parentRoute: typeof AuthenticatedAppRoute
+    }
+    '/_authenticated/inspector/complaints/': {
+      id: '/_authenticated/inspector/complaints/'
+      path: '/complaints'
+      fullPath: '/inspector/complaints/'
+      preLoaderRoute: typeof AuthenticatedInspectorComplaintsIndexRouteImport
+      parentRoute: typeof AuthenticatedInspectorRoute
+    }
+    '/_authenticated/inspector/complaints/$reference': {
+      id: '/_authenticated/inspector/complaints/$reference'
+      path: '/complaints/$reference'
+      fullPath: '/inspector/complaints/$reference'
+      preLoaderRoute: typeof AuthenticatedInspectorComplaintsReferenceRouteImport
+      parentRoute: typeof AuthenticatedInspectorRoute
+    }
   }
 }
 
+interface AuthenticatedAppRouteChildren {
+  AuthenticatedAppHelpRoute: typeof AuthenticatedAppHelpRoute
+  AuthenticatedAppNotificationsRoute: typeof AuthenticatedAppNotificationsRoute
+  AuthenticatedAppReportRoute: typeof AuthenticatedAppReportRoute
+  AuthenticatedAppIndexRoute: typeof AuthenticatedAppIndexRoute
+  AuthenticatedAppComplaintsReferenceRoute: typeof AuthenticatedAppComplaintsReferenceRoute
+  AuthenticatedAppComplaintsIndexRoute: typeof AuthenticatedAppComplaintsIndexRoute
+}
+
+const AuthenticatedAppRouteChildren: AuthenticatedAppRouteChildren = {
+  AuthenticatedAppHelpRoute: AuthenticatedAppHelpRoute,
+  AuthenticatedAppNotificationsRoute: AuthenticatedAppNotificationsRoute,
+  AuthenticatedAppReportRoute: AuthenticatedAppReportRoute,
+  AuthenticatedAppIndexRoute: AuthenticatedAppIndexRoute,
+  AuthenticatedAppComplaintsReferenceRoute:
+    AuthenticatedAppComplaintsReferenceRoute,
+  AuthenticatedAppComplaintsIndexRoute: AuthenticatedAppComplaintsIndexRoute,
+}
+
+const AuthenticatedAppRouteWithChildren =
+  AuthenticatedAppRoute._addFileChildren(AuthenticatedAppRouteChildren)
+
+interface AuthenticatedInspectorRouteChildren {
+  AuthenticatedInspectorInspectionsRoute: typeof AuthenticatedInspectorInspectionsRoute
+  AuthenticatedInspectorMapRoute: typeof AuthenticatedInspectorMapRoute
+  AuthenticatedInspectorRepairsRoute: typeof AuthenticatedInspectorRepairsRoute
+  AuthenticatedInspectorResolvedRoute: typeof AuthenticatedInspectorResolvedRoute
+  AuthenticatedInspectorTeamRoute: typeof AuthenticatedInspectorTeamRoute
+  AuthenticatedInspectorIndexRoute: typeof AuthenticatedInspectorIndexRoute
+  AuthenticatedInspectorComplaintsReferenceRoute: typeof AuthenticatedInspectorComplaintsReferenceRoute
+  AuthenticatedInspectorComplaintsIndexRoute: typeof AuthenticatedInspectorComplaintsIndexRoute
+}
+
+const AuthenticatedInspectorRouteChildren: AuthenticatedInspectorRouteChildren =
+  {
+    AuthenticatedInspectorInspectionsRoute:
+      AuthenticatedInspectorInspectionsRoute,
+    AuthenticatedInspectorMapRoute: AuthenticatedInspectorMapRoute,
+    AuthenticatedInspectorRepairsRoute: AuthenticatedInspectorRepairsRoute,
+    AuthenticatedInspectorResolvedRoute: AuthenticatedInspectorResolvedRoute,
+    AuthenticatedInspectorTeamRoute: AuthenticatedInspectorTeamRoute,
+    AuthenticatedInspectorIndexRoute: AuthenticatedInspectorIndexRoute,
+    AuthenticatedInspectorComplaintsReferenceRoute:
+      AuthenticatedInspectorComplaintsReferenceRoute,
+    AuthenticatedInspectorComplaintsIndexRoute:
+      AuthenticatedInspectorComplaintsIndexRoute,
+  }
+
+const AuthenticatedInspectorRouteWithChildren =
+  AuthenticatedInspectorRoute._addFileChildren(
+    AuthenticatedInspectorRouteChildren,
+  )
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAppRoute: typeof AuthenticatedAppRouteWithChildren
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedInspectorRoute: typeof AuthenticatedInspectorRouteWithChildren
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAppRoute: AuthenticatedAppRouteWithChildren,
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedInspectorRoute: AuthenticatedInspectorRouteWithChildren,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

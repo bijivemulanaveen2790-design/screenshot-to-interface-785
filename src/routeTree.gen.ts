@@ -18,6 +18,7 @@ import { Route as AuthenticatedDashboardRouteImport } from './routes/_authentica
 import { Route as AuthenticatedAppIndexRouteImport } from './routes/_authenticated/app.index'
 import { Route as AuthenticatedAppHelpRouteImport } from './routes/_authenticated/app.help'
 import { Route as AuthenticatedAppNotificationsRouteImport } from './routes/_authenticated/app.notifications'
+import { Route as AuthenticatedAppReportRouteImport } from './routes/_authenticated/app.report'
 import { Route as AuthenticatedAppComplaintsIndexRouteImport } from './routes/_authenticated/app.complaints.index'
 import { Route as AuthenticatedAppComplaintsReferenceRouteImport } from './routes/_authenticated/app.complaints.$reference'
 
@@ -66,6 +67,11 @@ const AuthenticatedAppNotificationsRoute =
     path: '/notifications',
     getParentRoute: () => AuthenticatedAppRoute,
   } as any)
+const AuthenticatedAppReportRoute = AuthenticatedAppReportRouteImport.update({
+  id: '/report',
+  path: '/report',
+  getParentRoute: () => AuthenticatedAppRoute,
+} as any)
 const AuthenticatedAppComplaintsIndexRoute =
   AuthenticatedAppComplaintsIndexRouteImport.update({
     id: '/complaints/',
@@ -87,6 +93,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/app/help': typeof AuthenticatedAppHelpRoute
   '/app/notifications': typeof AuthenticatedAppNotificationsRoute
+  '/app/report': typeof AuthenticatedAppReportRoute
   '/app/': typeof AuthenticatedAppIndexRoute
   '/app/complaints/$reference': typeof AuthenticatedAppComplaintsReferenceRoute
   '/app/complaints/': typeof AuthenticatedAppComplaintsIndexRoute
@@ -98,6 +105,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/app/help': typeof AuthenticatedAppHelpRoute
   '/app/notifications': typeof AuthenticatedAppNotificationsRoute
+  '/app/report': typeof AuthenticatedAppReportRoute
   '/app': typeof AuthenticatedAppIndexRoute
   '/app/complaints/$reference': typeof AuthenticatedAppComplaintsReferenceRoute
   '/app/complaints': typeof AuthenticatedAppComplaintsIndexRoute
@@ -112,6 +120,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/app/help': typeof AuthenticatedAppHelpRoute
   '/_authenticated/app/notifications': typeof AuthenticatedAppNotificationsRoute
+  '/_authenticated/app/report': typeof AuthenticatedAppReportRoute
   '/_authenticated/app/': typeof AuthenticatedAppIndexRoute
   '/_authenticated/app/complaints/$reference': typeof AuthenticatedAppComplaintsReferenceRoute
   '/_authenticated/app/complaints/': typeof AuthenticatedAppComplaintsIndexRoute
@@ -126,6 +135,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/app/help'
     | '/app/notifications'
+    | '/app/report'
     | '/app/'
     | '/app/complaints/$reference'
     | '/app/complaints/'
@@ -137,6 +147,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/app/help'
     | '/app/notifications'
+    | '/app/report'
     | '/app'
     | '/app/complaints/$reference'
     | '/app/complaints'
@@ -150,6 +161,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard'
     | '/_authenticated/app/help'
     | '/_authenticated/app/notifications'
+    | '/_authenticated/app/report'
     | '/_authenticated/app/'
     | '/_authenticated/app/complaints/$reference'
     | '/_authenticated/app/complaints/'
@@ -227,6 +239,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppNotificationsRouteImport
       parentRoute: typeof AuthenticatedAppRoute
     }
+    '/_authenticated/app/report': {
+      id: '/_authenticated/app/report'
+      path: '/report'
+      fullPath: '/app/report'
+      preLoaderRoute: typeof AuthenticatedAppReportRouteImport
+      parentRoute: typeof AuthenticatedAppRoute
+    }
     '/_authenticated/app/complaints/': {
       id: '/_authenticated/app/complaints/'
       path: '/complaints'
@@ -247,6 +266,7 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedAppRouteChildren {
   AuthenticatedAppHelpRoute: typeof AuthenticatedAppHelpRoute
   AuthenticatedAppNotificationsRoute: typeof AuthenticatedAppNotificationsRoute
+  AuthenticatedAppReportRoute: typeof AuthenticatedAppReportRoute
   AuthenticatedAppIndexRoute: typeof AuthenticatedAppIndexRoute
   AuthenticatedAppComplaintsReferenceRoute: typeof AuthenticatedAppComplaintsReferenceRoute
   AuthenticatedAppComplaintsIndexRoute: typeof AuthenticatedAppComplaintsIndexRoute
@@ -255,6 +275,7 @@ interface AuthenticatedAppRouteChildren {
 const AuthenticatedAppRouteChildren: AuthenticatedAppRouteChildren = {
   AuthenticatedAppHelpRoute: AuthenticatedAppHelpRoute,
   AuthenticatedAppNotificationsRoute: AuthenticatedAppNotificationsRoute,
+  AuthenticatedAppReportRoute: AuthenticatedAppReportRoute,
   AuthenticatedAppIndexRoute: AuthenticatedAppIndexRoute,
   AuthenticatedAppComplaintsReferenceRoute:
     AuthenticatedAppComplaintsReferenceRoute,

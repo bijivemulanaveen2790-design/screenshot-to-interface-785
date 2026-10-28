@@ -20,9 +20,12 @@ import { Route as AuthenticatedAppIndexRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedAppHelpRouteImport } from './routes/_authenticated/app.help'
 import { Route as AuthenticatedAppNotificationsRouteImport } from './routes/_authenticated/app.notifications'
 import { Route as AuthenticatedAppReportRouteImport } from './routes/_authenticated/app.report'
+import { Route as AuthenticatedInspectorIndexRouteImport } from './routes/_authenticated/inspector.index'
 import { Route as AuthenticatedInspectorInspectionsRouteImport } from './routes/_authenticated/inspector.inspections'
+import { Route as AuthenticatedInspectorMapRouteImport } from './routes/_authenticated/inspector.map'
 import { Route as AuthenticatedInspectorRepairsRouteImport } from './routes/_authenticated/inspector.repairs'
 import { Route as AuthenticatedInspectorResolvedRouteImport } from './routes/_authenticated/inspector.resolved'
+import { Route as AuthenticatedInspectorTeamRouteImport } from './routes/_authenticated/inspector.team'
 import { Route as AuthenticatedAppComplaintsIndexRouteImport } from './routes/_authenticated/app.complaints.index'
 import { Route as AuthenticatedAppComplaintsReferenceRouteImport } from './routes/_authenticated/app.complaints.$reference'
 import { Route as AuthenticatedInspectorComplaintsIndexRouteImport } from './routes/_authenticated/inspector.complaints.index'
@@ -82,10 +85,22 @@ const AuthenticatedAppReportRoute = AuthenticatedAppReportRouteImport.update({
   path: '/report',
   getParentRoute: () => AuthenticatedAppRoute,
 } as any)
+const AuthenticatedInspectorIndexRoute =
+  AuthenticatedInspectorIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedInspectorRoute,
+  } as any)
 const AuthenticatedInspectorInspectionsRoute =
   AuthenticatedInspectorInspectionsRouteImport.update({
     id: '/inspections',
     path: '/inspections',
+    getParentRoute: () => AuthenticatedInspectorRoute,
+  } as any)
+const AuthenticatedInspectorMapRoute =
+  AuthenticatedInspectorMapRouteImport.update({
+    id: '/map',
+    path: '/map',
     getParentRoute: () => AuthenticatedInspectorRoute,
   } as any)
 const AuthenticatedInspectorRepairsRoute =
@@ -98,6 +113,12 @@ const AuthenticatedInspectorResolvedRoute =
   AuthenticatedInspectorResolvedRouteImport.update({
     id: '/resolved',
     path: '/resolved',
+    getParentRoute: () => AuthenticatedInspectorRoute,
+  } as any)
+const AuthenticatedInspectorTeamRoute =
+  AuthenticatedInspectorTeamRouteImport.update({
+    id: '/team',
+    path: '/team',
     getParentRoute: () => AuthenticatedInspectorRoute,
   } as any)
 const AuthenticatedAppComplaintsIndexRoute =
@@ -130,9 +151,12 @@ export interface FileRoutesByFullPath {
   '/app/notifications': typeof AuthenticatedAppNotificationsRoute
   '/app/report': typeof AuthenticatedAppReportRoute
   '/inspector/inspections': typeof AuthenticatedInspectorInspectionsRoute
+  '/inspector/map': typeof AuthenticatedInspectorMapRoute
   '/inspector/repairs': typeof AuthenticatedInspectorRepairsRoute
   '/inspector/resolved': typeof AuthenticatedInspectorResolvedRoute
+  '/inspector/team': typeof AuthenticatedInspectorTeamRoute
   '/app/': typeof AuthenticatedAppIndexRoute
+  '/inspector/': typeof AuthenticatedInspectorIndexRoute
   '/app/complaints/$reference': typeof AuthenticatedAppComplaintsReferenceRoute
   '/app/complaints/': typeof AuthenticatedAppComplaintsIndexRoute
   '/inspector/complaints/': typeof AuthenticatedInspectorComplaintsIndexRoute
@@ -142,14 +166,16 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
-  '/inspector': typeof AuthenticatedInspectorRouteWithChildren
   '/app/help': typeof AuthenticatedAppHelpRoute
   '/app/notifications': typeof AuthenticatedAppNotificationsRoute
   '/app/report': typeof AuthenticatedAppReportRoute
   '/inspector/inspections': typeof AuthenticatedInspectorInspectionsRoute
+  '/inspector/map': typeof AuthenticatedInspectorMapRoute
   '/inspector/repairs': typeof AuthenticatedInspectorRepairsRoute
   '/inspector/resolved': typeof AuthenticatedInspectorResolvedRoute
+  '/inspector/team': typeof AuthenticatedInspectorTeamRoute
   '/app': typeof AuthenticatedAppIndexRoute
+  '/inspector': typeof AuthenticatedInspectorIndexRoute
   '/app/complaints/$reference': typeof AuthenticatedAppComplaintsReferenceRoute
   '/app/complaints': typeof AuthenticatedAppComplaintsIndexRoute
   '/inspector/complaints': typeof AuthenticatedInspectorComplaintsIndexRoute
@@ -167,9 +193,12 @@ export interface FileRoutesById {
   '/_authenticated/app/notifications': typeof AuthenticatedAppNotificationsRoute
   '/_authenticated/app/report': typeof AuthenticatedAppReportRoute
   '/_authenticated/inspector/inspections': typeof AuthenticatedInspectorInspectionsRoute
+  '/_authenticated/inspector/map': typeof AuthenticatedInspectorMapRoute
   '/_authenticated/inspector/repairs': typeof AuthenticatedInspectorRepairsRoute
   '/_authenticated/inspector/resolved': typeof AuthenticatedInspectorResolvedRoute
+  '/_authenticated/inspector/team': typeof AuthenticatedInspectorTeamRoute
   '/_authenticated/app/': typeof AuthenticatedAppIndexRoute
+  '/_authenticated/inspector/': typeof AuthenticatedInspectorIndexRoute
   '/_authenticated/app/complaints/$reference': typeof AuthenticatedAppComplaintsReferenceRoute
   '/_authenticated/app/complaints/': typeof AuthenticatedAppComplaintsIndexRoute
   '/_authenticated/inspector/complaints/': typeof AuthenticatedInspectorComplaintsIndexRoute
@@ -187,9 +216,12 @@ export interface FileRouteTypes {
     | '/app/notifications'
     | '/app/report'
     | '/inspector/inspections'
+    | '/inspector/map'
     | '/inspector/repairs'
     | '/inspector/resolved'
+    | '/inspector/team'
     | '/app/'
+    | '/inspector/'
     | '/app/complaints/$reference'
     | '/app/complaints/'
     | '/inspector/complaints/'
@@ -199,14 +231,16 @@ export interface FileRouteTypes {
     | '/auth'
     | '/reset-password'
     | '/dashboard'
-    | '/inspector'
     | '/app/help'
     | '/app/notifications'
     | '/app/report'
     | '/inspector/inspections'
+    | '/inspector/map'
     | '/inspector/repairs'
     | '/inspector/resolved'
+    | '/inspector/team'
     | '/app'
+    | '/inspector'
     | '/app/complaints/$reference'
     | '/app/complaints'
     | '/inspector/complaints'
@@ -223,9 +257,12 @@ export interface FileRouteTypes {
     | '/_authenticated/app/notifications'
     | '/_authenticated/app/report'
     | '/_authenticated/inspector/inspections'
+    | '/_authenticated/inspector/map'
     | '/_authenticated/inspector/repairs'
     | '/_authenticated/inspector/resolved'
+    | '/_authenticated/inspector/team'
     | '/_authenticated/app/'
+    | '/_authenticated/inspector/'
     | '/_authenticated/app/complaints/$reference'
     | '/_authenticated/app/complaints/'
     | '/_authenticated/inspector/complaints/'
@@ -317,11 +354,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppReportRouteImport
       parentRoute: typeof AuthenticatedAppRoute
     }
+    '/_authenticated/inspector/': {
+      id: '/_authenticated/inspector/'
+      path: '/'
+      fullPath: '/inspector/'
+      preLoaderRoute: typeof AuthenticatedInspectorIndexRouteImport
+      parentRoute: typeof AuthenticatedInspectorRoute
+    }
     '/_authenticated/inspector/inspections': {
       id: '/_authenticated/inspector/inspections'
       path: '/inspections'
       fullPath: '/inspector/inspections'
       preLoaderRoute: typeof AuthenticatedInspectorInspectionsRouteImport
+      parentRoute: typeof AuthenticatedInspectorRoute
+    }
+    '/_authenticated/inspector/map': {
+      id: '/_authenticated/inspector/map'
+      path: '/map'
+      fullPath: '/inspector/map'
+      preLoaderRoute: typeof AuthenticatedInspectorMapRouteImport
       parentRoute: typeof AuthenticatedInspectorRoute
     }
     '/_authenticated/inspector/repairs': {
@@ -336,6 +387,13 @@ declare module '@tanstack/react-router' {
       path: '/resolved'
       fullPath: '/inspector/resolved'
       preLoaderRoute: typeof AuthenticatedInspectorResolvedRouteImport
+      parentRoute: typeof AuthenticatedInspectorRoute
+    }
+    '/_authenticated/inspector/team': {
+      id: '/_authenticated/inspector/team'
+      path: '/team'
+      fullPath: '/inspector/team'
+      preLoaderRoute: typeof AuthenticatedInspectorTeamRouteImport
       parentRoute: typeof AuthenticatedInspectorRoute
     }
     '/_authenticated/app/complaints/': {
@@ -386,8 +444,11 @@ const AuthenticatedAppRouteWithChildren =
 
 interface AuthenticatedInspectorRouteChildren {
   AuthenticatedInspectorInspectionsRoute: typeof AuthenticatedInspectorInspectionsRoute
+  AuthenticatedInspectorMapRoute: typeof AuthenticatedInspectorMapRoute
   AuthenticatedInspectorRepairsRoute: typeof AuthenticatedInspectorRepairsRoute
   AuthenticatedInspectorResolvedRoute: typeof AuthenticatedInspectorResolvedRoute
+  AuthenticatedInspectorTeamRoute: typeof AuthenticatedInspectorTeamRoute
+  AuthenticatedInspectorIndexRoute: typeof AuthenticatedInspectorIndexRoute
   AuthenticatedInspectorComplaintsIndexRoute: typeof AuthenticatedInspectorComplaintsIndexRoute
 }
 
@@ -395,8 +456,11 @@ const AuthenticatedInspectorRouteChildren: AuthenticatedInspectorRouteChildren =
   {
     AuthenticatedInspectorInspectionsRoute:
       AuthenticatedInspectorInspectionsRoute,
+    AuthenticatedInspectorMapRoute: AuthenticatedInspectorMapRoute,
     AuthenticatedInspectorRepairsRoute: AuthenticatedInspectorRepairsRoute,
     AuthenticatedInspectorResolvedRoute: AuthenticatedInspectorResolvedRoute,
+    AuthenticatedInspectorTeamRoute: AuthenticatedInspectorTeamRoute,
+    AuthenticatedInspectorIndexRoute: AuthenticatedInspectorIndexRoute,
     AuthenticatedInspectorComplaintsIndexRoute:
       AuthenticatedInspectorComplaintsIndexRoute,
   }

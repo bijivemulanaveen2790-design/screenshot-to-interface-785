@@ -39,7 +39,7 @@ function InspectorDashboard() {
 
       {isError ? <p className="mt-6 text-sm text-destructive">Could not load complaints: {(error as Error).message}</p> : null}
 
-      <div className="mt-8 grid gap-6 xl:grid-cols-[1.2fr_1fr]">
+      <div className="mt-8 grid gap-6 2xl:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
         <div>
           <div className="mb-3 flex items-center justify-between">
             <h2 className="font-display text-lg font-bold">Needs inspection</h2>

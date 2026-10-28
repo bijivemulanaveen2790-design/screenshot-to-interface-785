@@ -11,7 +11,7 @@ export function Brand({ className, inverted }: { className?: string; inverted?: 
         <span className={cn("block font-display text-sm font-extrabold tracking-tight", inverted && "text-sidebar-accent-foreground")}>
           RoadWatch
         </span>
-        <span className={cn("block text-[10px] font-medium uppercase tracking-[0.14em]", inverted ? "text-sidebar-foreground/60" : "text-muted-foreground")}>
+        <span className={cn("hidden text-[10px] font-medium uppercase tracking-[0.14em] sm:block", inverted ? "text-sidebar-foreground/60" : "text-muted-foreground")}>
           Road Damage Desk
         </span>
       </span>

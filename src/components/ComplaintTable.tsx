@@ -61,7 +61,7 @@ export function FilterBar({
   const set = <K extends keyof Filters>(k: K, v: Filters[K]) => setFilters({ ...filters, [k]: v });
   const dirty = JSON.stringify(filters) !== JSON.stringify(EMPTY_FILTERS);
   return (
-    <div className="mb-4 grid gap-3 rounded-lg border bg-card p-4 shadow-card md:grid-cols-2 xl:grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr_auto]">
+    <div className="mb-4 flex flex-wrap items-center gap-3 rounded-lg border bg-card p-4 shadow-card [&>*]:min-w-40 [&>*]:flex-1">
       <div className="relative">
         <Search className="absolute left-2.5 top-2.5 size-4 text-muted-foreground" aria-hidden />
         <Input
@@ -134,7 +134,7 @@ export function ComplaintTable({ items }: { items: ComplaintListItem[] }) {
                 <Link
                   to="/inspector/complaints/$reference"
                   params={{ reference: c.reference }}
-                  className="font-mono text-xs font-semibold underline decoration-primary decoration-2 underline-offset-4"
+                  className="whitespace-nowrap font-mono text-xs font-semibold underline decoration-primary decoration-2 underline-offset-4"
                 >
                   {c.reference}
                 </Link>

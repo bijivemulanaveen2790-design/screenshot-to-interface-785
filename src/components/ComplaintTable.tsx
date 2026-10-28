@@ -62,7 +62,7 @@ export function FilterBar({
   const dirty = JSON.stringify(filters) !== JSON.stringify(EMPTY_FILTERS);
   return (
     <div className="mb-4 flex flex-wrap items-center gap-3 rounded-lg border bg-card p-4 shadow-card [&>*]:min-w-40 [&>*]:flex-1">
-      <div className="relative">
+      <div className="relative !min-w-64 !grow-[3]">
         <Search className="absolute left-2.5 top-2.5 size-4 text-muted-foreground" aria-hidden />
         <Input
           aria-label="Search by reference, road name or location"
